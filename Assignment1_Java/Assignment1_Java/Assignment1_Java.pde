@@ -2,7 +2,7 @@ int value = 255;
 int position_x = 0;
 int position_y = 0;
 int counter = 0;
-String stat_1 = "Counter is...";
+String stat_1 = "To know the number of circles, press 'c'";
 
 void setup() {
   size(640,380);
@@ -33,9 +33,7 @@ void draw() {
   textAlign(RIGHT);
   text(stat_1, 635, 355);
   int s = second();  // Values from 0 - 59
-  int m = minute();  // Values from 0 - 59
-  int h = hour();    // Values from 0 - 23
-  text(s,600,300);
+  text("Seconds passed:" + s,600,300);
 }
   
 void keyPressed() {
