@@ -57,13 +57,14 @@ class Connection():
     
 def setup():
     size(800, 700)
+    
+    # Runs over and over at 60 - FPS
+    
+def draw():
     lucy = Person ('Lucy', '2')
     people.append(lucy)
     emily = Person('Emily', '1')
     people.append(emily)
-    # Runs over and over at 60 - FPS
-    
-def draw():
     background(0) #black background
     #background(255); white background
 
