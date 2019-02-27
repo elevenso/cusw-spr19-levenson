@@ -37,6 +37,8 @@ void draw(){
   
   if (keyPressed) {
     image(background,0,0);
+    fill(0, 120);
+    rect(0, 0, width, height);
   }
   
   /**for(int i = 0; i<polygons.size(); i++){

@@ -25,11 +25,11 @@ void parseData(){
     JSONObject properties = features.getJSONObject(i).getJSONObject("properties");
     
     //identify more information!
-    String dataHighway = properties.getJSONObject("tags").getString("highway");
-    String highway = properties.getJSONObject("tags").getString("highway");
+    String dataPublicTransport = properties.getJSONObject("tags").getString("stop_area");
+    String public_transport = properties.getJSONObject("tags").getString("stop_area");
     //there will be gaps in data, so make sure to check for these
-    if (dataHighway != null) highway = dataHighway;
-    else highway = "";
+    if (dataPublicTransport != null) public_transport = dataPublicTransport;
+    else public_transport = "";
     
     String dataAmenity = properties.getJSONObject("tags").getString("amenity");
     String amenity = properties.getJSONObject("tags").getString("amenity");
@@ -45,13 +45,13 @@ void parseData(){
       float lon = geometry.getJSONArray("coordinates").getFloat(0);
       
       POI poi = new POI(lat, lon);
-      poi.type = highway;
-      if(highway.equals("bus_stop")) poi.Bus_Stop = true;
+      poi.type = public_transport;
+      if(public_transport.equals("stop_area")) poi.Bus_Stop = true;
       pois.add(poi);
       
       POI cafe = new POI(lat, lon);
-      poi.type = amenity;
-      if(amenity.equals("cafe")) poi.Cafe_Bool = true;
+      cafe.type = amenity;
+      if(amenity.equals("cafe")) cafe.Cafe_Bool = true;
       pois.add(cafe);
       }
     
