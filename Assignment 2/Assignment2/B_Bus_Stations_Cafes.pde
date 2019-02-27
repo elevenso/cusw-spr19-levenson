@@ -8,8 +8,11 @@ class POI{
   float lat;
   float lon;
   
-  //Is Arts Center?
-  boolean Arts_Centre;
+  //Is Bus Station?
+  boolean Bus_Stop;
+  
+  //Is Cafe?
+  boolean Cafe_Bool;
   
   //Type -- may use later
   String type;
@@ -21,10 +24,13 @@ class POI{
   coord = new PVector(lat, lon);
   }
   
-  void draw(){
+  void draw() {
     PVector screenLocation = map.getScreenLocation(coord);
+    fill(poi_fill);
     noStroke();
-    if(Arts_Centre) fill(arts_centre);
+    if (Bus_Stop) fill(bus_stop_color);
+    ellipse(screenLocation.x, screenLocation.y, 6, 6);
+    if (Cafe_Bool) fill(cafe_fill);
     ellipse(screenLocation.x, screenLocation.y, 6, 6);
   }
 }

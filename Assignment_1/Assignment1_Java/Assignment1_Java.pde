@@ -3,11 +3,13 @@ int position_x = 0;
 int position_y = 0;
 int counter = 0;
 String stat_1 = "To know the number of circles, press 'c'";
+PGraphics pg;
 
 void setup() {
   size(640,380);
   background(0);
   frameRate(60);
+  pg = createGraphics(40, 40);
 }
 
 void draw() {
@@ -28,12 +30,14 @@ void draw() {
   
   
   keyTyped();
-  fill(255);
-  textSize(14);
-  textAlign(RIGHT);
-  text(stat_1, 635, 355);
+  pg.beginDraw();
+  pg.fill(255);
+  pg.textSize(14);
+  pg.textAlign(RIGHT);
+  pg.text(stat_1, 635, 355);
   int s = second();  // Values from 0 - 59
-  text("Seconds passed:" + s,600,300);
+  pg.text("Seconds passed:" + s,600,300);
+  pg.endDraw();
 }
   
 void keyPressed() {
