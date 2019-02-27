@@ -7,6 +7,8 @@ void drawInfo(){
   fill(0);
   rect(20, 20, 125, 90);
   textSize(16);
+  fill(poi_fill);
+  text("POIs", 25, 40);
   fill(bus_stop_color);
   text("Bus Stop", 25, 60);
   fill(cafe_fill);

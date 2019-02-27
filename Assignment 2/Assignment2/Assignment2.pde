@@ -8,6 +8,7 @@ This template is just a suggested structure but feel free to modify it, use code
 //blank map
 MercatorMap map;
 PImage background;
+boolean Show_POIs;
 
 void setup(){
 size(1000, 650);
@@ -27,8 +28,15 @@ void draw(){
   fill(0, 120);
   rect(0, 0, width, height);
   
+  keyTyped();
+  if (Show_POIs){
   for (int i =0; i<pois.size(); i++){
     pois.get(i).draw();
+  }
+  }
+  
+  if (keyPressed) {
+    image(background,0,0);
   }
   
   /**for(int i = 0; i<polygons.size(); i++){
@@ -36,4 +44,11 @@ void draw(){
   }*/
   
   drawInfo();
+  
+}
+
+void keyTyped(){
+  if (key=='c') {
+    Show_POIs = true;
+  }
 }
