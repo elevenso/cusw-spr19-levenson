@@ -2,7 +2,8 @@ int value = 255;
 int position_x = 0;
 int position_y = 0;
 int counter = 0;
-String stat_1 = "To know the number of circles, press 'c'";
+String stat_1 = "To know the mouse position, press 'c'";
+String stat_2 = "";
 PGraphics art, text;
 
 void setup() {
@@ -43,7 +44,7 @@ void draw() {
   text.fill(255);
   text.textSize(14);
   text.textAlign(RIGHT);
-  text.text(stat_1, 635, 355);
+  text.text(stat_1 + " , " + stat_2, 635, 355);
   int s = second();  // Values from 0 - 59
   text.text("Seconds passed:" + s,600,300);
   text.endDraw();
@@ -63,8 +64,10 @@ void keyPressed() {
 
 void keyTyped() {
   if (key=='c') {
-    counter = counter + 1;
-    stat_1 = Integer.toString(counter);
+    position_x = mouseX;
+    position_y = mouseY;
+    stat_1 = "Mouse position: " + Integer.toString(position_x);
+    stat_2 = Integer.toString(position_y);
   }
 }
   
