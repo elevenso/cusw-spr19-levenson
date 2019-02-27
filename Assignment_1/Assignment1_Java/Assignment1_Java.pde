@@ -11,9 +11,10 @@ void setup() {
   //create Off Screen graphics (holding layers in "cloud")
   art = createGraphics(width, height);
   text = createGraphics(width, height);
+  
   //draw black background once
   art.beginDraw();
-  background(0);
+  art.background(0);
   art.endDraw();
 }
 
