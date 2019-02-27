@@ -3,41 +3,53 @@ int position_x = 0;
 int position_y = 0;
 int counter = 0;
 String stat_1 = "To know the number of circles, press 'c'";
-PGraphics pg;
+PGraphics art, text;
 
 void setup() {
   size(640,380);
-  background(0);
   frameRate(60);
-  pg = createGraphics(40, 40);
+  
+  // Create OFF SCREEN Graphics to hold layers of our visualization
+  art = createGraphics(width, height);
+  text = createGraphics(width, height);
+  
+  // Draw a black background ONCE
+  art.beginDraw();
+  art.background(0);
+  art.endDraw();
 }
 
 void draw() {
   
+  // Draw the art off screen
+  art.beginDraw();
   if (mousePressed) {
-    fill(255, 200, 50);
+    art.fill(255, 200, 50);
     
   } else {
-    fill(255, 100, 50);
+    art.fill(255, 100, 50);
   }
-  
-  quad(mouseX+50, mouseY+50, 199, 14, 392, 66, 351, 107);
-  
-  arc(mouseX+40, mouseY+40, 40, 40, QUARTER_PI, PI+QUARTER_PI);
-  
-  fill(value, 50, 10);
-  circle(mouseX+10, mouseY+10, 50);
-  
+  art.quad(mouseX+50, mouseY+50, 199, 14, 392, 66, 351, 107);
+  art.arc(mouseX+40, mouseY+40, 40, 40, QUARTER_PI, PI+QUARTER_PI);
+  art.fill(value, 50, 10);
+  art.circle(mouseX+10, mouseY+10, 50);
+  art.endDraw();
   
   keyTyped();
-  pg.beginDraw();
-  pg.fill(255);
-  pg.textSize(14);
-  pg.textAlign(RIGHT);
-  pg.text(stat_1, 635, 355);
+  
+  // Draw the Text off Screen
+  text.beginDraw();
+  text.clear();
+  text.fill(255);
+  text.textSize(14);
+  text.textAlign(RIGHT);
+  text.text(stat_1, 635, 355);
   int s = second();  // Values from 0 - 59
-  pg.text("Seconds passed:" + s,600,300);
-  pg.endDraw();
+  text.text("Seconds passed:" + s,600,300);
+  text.endDraw();
+  
+  image(art, 0, 0);
+  image(text, 0, 0);
 }
   
 void keyPressed() {
