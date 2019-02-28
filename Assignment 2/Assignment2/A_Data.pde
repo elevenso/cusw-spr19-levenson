@@ -25,11 +25,11 @@ void parseData(){
     JSONObject properties = features.getJSONObject(i).getJSONObject("properties");
     
     //identify more information!
-    String dataPublicTransport = properties.getJSONObject("tags").getString("stop_area");
-    String public_transport = properties.getJSONObject("tags").getString("stop_area");
-    //there will be gaps in data, so make sure to check for these
-    if (dataPublicTransport != null) public_transport = dataPublicTransport;
-    else public_transport = "";
+
+    String dataPublicTransport = properties.getJSONObject("tags").getString("public_transport");
+    String publictransport = properties.getJSONObject("tags").getString("public_transport");
+    if (dataPublicTransport != null) publictransport = dataPublicTransport;
+    else publictransport = "";
     
     String dataAmenity = properties.getJSONObject("tags").getString("amenity");
     String amenity = properties.getJSONObject("tags").getString("amenity");
@@ -44,19 +44,25 @@ void parseData(){
       float lat = geometry.getJSONArray("coordinates").getFloat(1);
       float lon = geometry.getJSONArray("coordinates").getFloat(0);
       
-      POI poi = new POI(lat, lon);
-      poi.type = public_transport;
-      if(public_transport.equals("stop_area")) poi.Bus_Stop = true;
-      pois.add(poi);
-      
       POI cafe = new POI(lat, lon);
       cafe.type = amenity;
       if(amenity.equals("cafe")) cafe.Cafe_Bool = true;
       pois.add(cafe);
+      
+      POI restaurant = new POI(lat, lon);
+      restaurant.type = amenity;
+      if(amenity.equals("restaurant")) restaurant.Restaurant_Bool = true;
+      pois.add(restaurant);
+      
+      
+      POI _publictransport = new POI(lat, lon);
+      _publictransport.type = publictransport;
+      if(publictransport.equals("platform")) _publictransport.Transport_Bool = true;
+      pois.add(_publictransport);
       }
     
     //Polygons if polygon
-    /**if(type.equals("Polygon")){
+    if(type.equals("Polygon")){
       ArrayList<PVector> coords = new ArrayList<PVector>();
       //get the coordinates and iterate through them
       JSONArray coordinates = geometry.getJSONArray("coordinates").getJSONArray(0);
@@ -68,10 +74,29 @@ void parseData(){
         coords.add(coordinate);
       }
       //Create the Polygon with the coordinate PVectors
-      Polygon poly = new Polygon(coords);
-      polygons.add(poly);
+      Polygon stop = new Polygon(coords);
+      //if(stop.equals("stop_area")){ stop.Bus_Stop = true;
+      polygons.add(stop);
+      //}
     }
-    */
+    
+    //Way if a LineString
+    if(type.equals("LineString")){
+      ArrayList<PVector> coords = new ArrayList<PVector>();
+      //get the coordinates and iterate through them
+      JSONArray coordinates = geometry.getJSONArray("coordinates");
+      for(int j = 0; j<coordinates.size(); j++){
+        float lat = coordinates.getJSONArray(j).getFloat(1);
+        float lon = coordinates.getJSONArray(j).getFloat(0);
+        //Make a PVector and add it
+        PVector coordinate = new PVector(lat, lon);
+        coords.add(coordinate);
+      }
+      //Create the Way with the coordinate PVectors
+      Way way = new Way(coords);
+      ways.add(way);
+    }
+ 
     
   }
  }

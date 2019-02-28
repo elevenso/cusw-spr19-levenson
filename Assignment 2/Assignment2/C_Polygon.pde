@@ -17,9 +17,10 @@ class Polygon{
   
   //Making the shape to draw
   void makeShape(){
+   //if (Bus_Stop);{
     p = createShape();
     p.beginShape();
-    p.fill(cafe_fill);
+    p.fill(polygon_color);
     p.strokeWeight(.5);
     p.stroke(255);
     for(int i = 0; i<coordinates.size(); i++){
@@ -27,6 +28,7 @@ class Polygon{
         p.vertex(screenLocation.x, screenLocation.y);
     }
     p.endShape();
+   //}
   }
 
   //Drawing shape
