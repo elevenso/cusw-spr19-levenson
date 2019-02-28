@@ -14,7 +14,7 @@ boolean Show_Ways;
 boolean Clear;
 
 void setup(){
-size(1000, 650);
+size(850, 650);
   
   //Intiailize your data structures early in setup 
   //Bounding box: min and max longitudes and latitudes of location
