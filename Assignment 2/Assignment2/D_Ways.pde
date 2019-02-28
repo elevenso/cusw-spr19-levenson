@@ -14,7 +14,7 @@ class Way{
   
   //Draw the road
   void draw(){
-    strokeWeight(4);
+    strokeWeight(3);
     stroke(road_color);
     for(int i = 0; i<coordinates.size()-1; i++){
         //iterate through the coordinates and draw lines
