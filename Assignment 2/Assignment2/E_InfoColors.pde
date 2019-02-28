@@ -7,7 +7,7 @@ color transport_fill = color(15,255,100);
 
 void drawInfo(){
   //Legend - make sure to include in homework!
-  fill(0);
+  fill(0,185);
   rect(20, 20, 200, 90);
   textSize(16);
   fill(transport_fill);
