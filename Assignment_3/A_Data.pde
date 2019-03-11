@@ -49,13 +49,13 @@ void parseData(){
        }
   }
   
-  //Add attribute you want to your polygon (you can add more attributes if you want and look at the Tiger page for more info) 
+  //Add attributes to polygon
   for(int i = 0; i<CensusPolygons.size(); i++){
     CensusPolygons.get(i).score = CensusData.getFloat(i, "DP0020001"); //median age
-    //this is ONLY if the IDs are accurate
     CensusPolygons.get(i).colorByScore();
-    CensusPolygons.get(i).makeShape();
+    //CensusPolygons.get(i).makeShape();
     CensusPolygons.get(i).household_score = (CensusData.getFloat(i, "DP0130003")/(CensusData.getFloat(i, "DP0130001")-CensusData.getFloat(i, "DP0130003"))); //households w/ children/households withoutl    CensusPolygons.get(i).colorHouseholdsByScore();
+    CensusPolygons.get(i).colorHouseholdsByScore();
     CensusPolygons.get(i).makeShape();
     /**CensusPolygons.get(i).label = CensusData.getString(i, "NAME10"); //district label
     CensusPolygons.get(i).labelLocation();*/

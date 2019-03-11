@@ -38,7 +38,7 @@ class Polygon{
   }
   
   void colorHouseholdsByScore(){
-    household_fill = color(255*(1-household_score)); //darker means more households w/ children
+    household_fill = color(round(255*(1-household_score))); //darker means more households w/ children
   }
   
   /**void labelLocation(){
@@ -67,8 +67,8 @@ class Polygon{
     q = createShape();
     q.beginShape();
     q.fill(household_fill, 200);
-    println("fill", household_fill);
-    println("score", household_score);
+    println("fill:", household_fill);
+    println("score:", household_score);
     q.stroke(0);
     q.strokeWeight(.5);
     for(int i = 0; i<coordinates.size(); i++){
