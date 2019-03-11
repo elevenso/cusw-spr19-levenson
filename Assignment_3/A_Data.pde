@@ -20,6 +20,10 @@ void parseData(){
    district = new Polygon(coords);
    district.outline = true;
    district.makeShape();  
+   
+   households = new Polygon(coords);
+   households.outline = true;
+   households.makeShape();  
 
 //Now we can parse the population polygons
   int previd = 0;
@@ -51,13 +55,11 @@ void parseData(){
     //this is ONLY if the IDs are accurate
     CensusPolygons.get(i).colorByScore();
     CensusPolygons.get(i).makeShape();
-    CensusPolygons.get(i).label = CensusData.getString(i, "NAME10"); //district label
-    /**CensusPolygons.get(i).labelLocation();*/
+    CensusPolygons.get(i).household_score = (CensusData.getFloat(i, "DP0130003")/(CensusData.getFloat(i, "DP0130001")-CensusData.getFloat(i, "DP0130003"))); //households w/ children/households withoutl    CensusPolygons.get(i).colorHouseholdsByScore();
+    CensusPolygons.get(i).makeShape();
+    /**CensusPolygons.get(i).label = CensusData.getString(i, "NAME10"); //district label
+    CensusPolygons.get(i).labelLocation();*/
   }
-  
-
-  //Test case for point in Polygon
-  //println(district.pointInPolygon(new PVector(27.25, -80.85)));
   
   println("Data Parsed");
 }

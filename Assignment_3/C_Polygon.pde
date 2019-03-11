@@ -1,14 +1,18 @@
 ArrayList<Polygon> CensusPolygons;
 Polygon district;
+Polygon households;
 
 class Polygon{
   //Shape, coordinates, and color variables
   PShape p;
+  PShape q;
   ArrayList<PVector>coordinates;
   color fill;
+  color household_fill;
   float pop;
   int id; 
   float score;
+  float household_score;
   String label;
   float[][] scores;
   boolean outline; 
@@ -33,6 +37,10 @@ class Polygon{
     fill = color(255*(score-30)/25); //lighter means older
   }
   
+  void colorHouseholdsByScore(){
+    household_fill = color(255*(1-household_score)); //darker means more households w/ children
+  }
+  
   /**void labelLocation(){
      text(label, 0, 0);
   }*/
@@ -55,12 +63,31 @@ class Polygon{
     }
     fill(255, 100, 100);
     p.endShape();
+    
+    q = createShape();
+    q.beginShape();
+    q.fill(household_fill, 200);
+    println("fill", household_fill);
+    println("score", household_score);
+    q.stroke(0);
+    q.strokeWeight(.5);
+    for(int i = 0; i<coordinates.size(); i++){
+        PVector screenLocation = map.getScreenLocation(coordinates.get(i));
+        q.vertex(screenLocation.x, screenLocation.y);
+    }
+    fill(255, 100, 100);
+    q.endShape();
   }
   
 
   //Drawing shape
   void draw(){
-    shape(p, 0, 0);
+    if (Show_Median_Age){
+      shape(p, 0, 0);
+    }
+    if (Show_Households){
+      shape(q, 0, 0);
+    }
     //labelLocation();
   }
 

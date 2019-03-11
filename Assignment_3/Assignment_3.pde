@@ -1,6 +1,7 @@
 MercatorMap map;
 PImage background;
-boolean Show_Schools;
+boolean Show_Median_Age;
+boolean Show_Households;
 boolean Clear;
 
 void setup(){
@@ -20,38 +21,58 @@ void draw(){
   
   keyPressed();
   
-  if(Show_Schools){
+  if(Show_Median_Age){
     for(int i = 0; i<CensusPolygons.size(); i++){
       CensusPolygons.get(i).draw();
     district.draw(); 
+    }
   }
+  
+  if(Show_Households){
+    for(int i = 0; i<CensusPolygons.size(); i++){
+      CensusPolygons.get(i).draw();
+    households.draw(); 
+    }
   }
   
   if (Clear){
-    Show_Schools = false;
+    Show_Median_Age = false;
+    Show_Households = false;
     Clear = false;
   }
   
   fill(178, 24, 81, 185);
   noStroke();
-  rect(20, 620, 200, 155);
+  rect(20, 610, 250, 165);
   textSize(18);
   fill(0);
-  text("School Districts", 30, 650);
-  text("in the San Francisco", 30, 675);
-  text("Bay Area", 30, 700);
-  textSize(12);
-  text("Lighter polygons indicate" , 30, 735);
-  text("higher median age.", 30, 755);
-  textSize(8);
-  text("(Press any key to view data", 30, 770);
-  text("Press 'c' to clear.)", 30, 780);
-  
+  text("School Districts", 30, 640);
+  text("in the San Francisco", 30, 665);
+  text("Bay Area", 30, 690);
+  textSize(10);
+  text("(Press 'm' for median age", 30, 740);
+  text("Press 'h' for households with children/without", 30, 753);
+  text("Press 'c' to clear.)", 30, 766);
+  if (Show_Households){
+    textSize(12);
+    text("Darker polygons indicate more" , 30, 710);
+    text("households with children.", 30, 725);
+  }
+  if (Show_Median_Age){
+    textSize(12);
+    text("Darker polygons indicate lower" , 30, 710);
+    text("median age.", 30, 725);
+  }
 }
 
 void keyPressed(){
-  if (keyPressed) {
-    Show_Schools = true;
+  if (key=='m') {
+    Show_Median_Age = true;
+    Show_Households = false;
+  }
+  if (key=='h'){
+    Show_Households = true;
+    Show_Median_Age = false;
   }
   if(key=='c'){
     Clear = true;

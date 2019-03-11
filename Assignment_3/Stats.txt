@@ -1,0 +1,11 @@
+What case study area did you pick and why?
+I picked the San Francisco Bay Area because that's where I'm from. I was curious about how old various populations were in the area. 
+
+What metrics did you pick and why?
+I picked median age and the ratio of households with children/households without to look at two ways to guess how much of the population is in school. 
+
+What statistical test did you use and why?
+I used Spearman's Rank to see if median age was related to ratio of households with children under 18 to households without.
+
+What was it's result (again not graded for accuracy)?
+r=-0.419398611 suggests that they are not strongly related.
