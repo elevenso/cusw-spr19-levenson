@@ -1,6 +1,8 @@
 Table SchoolBoundary, CensusData, CensusBlocks;
 
 void loadData(){
+  background = loadImage("data/Bay_Area.png");
+  background.resize(width, height);
   SchoolBoundary = loadTable("data/Attributes.csv", "header");
   CensusBlocks = loadTable("data/Nodes.csv", "header");
   CensusData = loadTable("data/Geometry.csv", "header");
@@ -49,6 +51,8 @@ void parseData(){
     //this is ONLY if the IDs are accurate
     CensusPolygons.get(i).colorByScore();
     CensusPolygons.get(i).makeShape();
+    CensusPolygons.get(i).label = CensusData.getString(i, "NAME10"); //district label
+    /**CensusPolygons.get(i).labelLocation();*/
   }
   
 

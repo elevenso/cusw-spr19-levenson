@@ -9,8 +9,10 @@ class Polygon{
   float pop;
   int id; 
   float score;
+  String label;
   float[][] scores;
   boolean outline; 
+  float coord_x, coord_y;
 
   //Empty constructor
   Polygon(){
@@ -27,42 +29,19 @@ class Polygon{
     fill = _c;
   }
   
-  //void normalizeScores(){
-    //float min = 1000000;
-    //float max = 0;
-    //float val = _score;
-    //if (val < min) min = val;
-    //if (val > max) max = val;
-  //}
-  
   void colorByScore(){
-    //int cellX, cellY;
-    //float[][] _scores;
-    //color worst, mid, best;
- 
-      //worst = color(200, 0, 0);
-      //mid = color(255, 255, 0);
-      //best = color(0, 200, 0);
-      //scores = new float[cellX][cellY];
-    
-    /**for(int i = 0; i<numX; i++){
-      for(int j = 0; j<numY; j++){
-        color col = color(0, 0, 0);
-        float val = _scores[i][j];
-        if(val*255/56000 < 50) col = lerpColor(worst, mid, val/100); //convert data to color
-        if(val*255/56000 == 50) col = mid;
-        if(val*255/56000 > 50) col = lerpColor(mid, best, val/100);
-        fill = color(col);
-      }
-    }*/
-    fill = color(score);
+    fill = color(255*(score-30)/25); //lighter means older
   }
+  
+  /**void labelLocation(){
+     text(label, 0, 0);
+  }*/
   
   //Making the shape to draw
   void makeShape(){
     p = createShape();
     p.beginShape();
-    p.fill(fill);
+    p.fill(fill, 200);
     p.stroke(0);
     p.strokeWeight(.5);
     if(outline){
@@ -74,6 +53,7 @@ class Polygon{
         PVector screenLocation = map.getScreenLocation(coordinates.get(i));
         p.vertex(screenLocation.x, screenLocation.y);
     }
+    fill(255, 100, 100);
     p.endShape();
   }
   
@@ -81,6 +61,7 @@ class Polygon{
   //Drawing shape
   void draw(){
     shape(p, 0, 0);
+    //labelLocation();
   }
 
   
