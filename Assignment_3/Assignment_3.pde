@@ -63,6 +63,8 @@ void draw(){
     text("Darker polygons indicate lower" , 30, 710);
     text("median age.", 30, 725);
   }
+  textSize(10);
+  text("Based on 2010 Census Data", 650, 770);
 }
 
 void keyPressed(){
