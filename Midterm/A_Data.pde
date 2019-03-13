@@ -4,7 +4,7 @@ JSONObject Park;
 
 void loadData(){
   background = loadImage("Civic_Center_Map.png");
-  background.resize(width, height);
+  background.resize(width-200, height);
   
   Park = loadJSONObject("civic_map.json");
   features = Park.getJSONArray("features");
