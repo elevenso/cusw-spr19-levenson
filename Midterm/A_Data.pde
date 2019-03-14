@@ -18,15 +18,23 @@ void parseData(){
     JSONObject geometry = features.getJSONObject(i).getJSONObject("geometry");
     JSONObject properties = features.getJSONObject(i).getJSONObject("properties");
     
+    //natural to find grass
     String dataNatural = properties.getJSONObject("tags").getString("natural");
     String natural = properties.getJSONObject("tags").getString("natural");
     if (dataNatural != null) natural = dataNatural;
     else natural = "";
     
+    //landuse to find grass
     String dataLanduse = properties.getJSONObject("tags").getString("landuse");
     String landuse = properties.getJSONObject("tags").getString("landuse");
     if (dataLanduse != null) landuse = dataLanduse;
     else landuse = "";
+    
+    //amenities to find benches
+    String dataAmenity = properties.getJSONObject("tags").getString("amenity");
+    String amenity = properties.getJSONObject("tags").getString("amenity");
+    if (dataAmenity != null) amenity = dataAmenity;
+    else amenity = "";
     
     if(type.equals("Point")){
       float lat = geometry.getJSONArray("coordinates").getFloat(1);
@@ -36,6 +44,11 @@ void parseData(){
       tree.type = natural;
       if(natural.equals("tree")) tree.Tree_Bool = true;
       pois.add(tree);
+      
+      POI bench = new POI(lat, lon);
+      bench.type = amenity;
+      if(amenity.equals("bench")) bench.Bench_Bool = true;
+      pois.add(bench);
     }
     
     if(type.equals("Polygon")){

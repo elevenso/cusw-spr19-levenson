@@ -16,12 +16,12 @@ void draw(){
   fill(0, 100);
   rect(0, 0, width-200, height);
   
-  for (int i =0; i<pois.size(); i++){
-    pois.get(i).draw();
-  }
-  
   for(int i = 0; i<polygons.size(); i++){
     polygons.get(i).draw();
+  }
+  
+  for (int i =0; i<pois.size(); i++){
+    pois.get(i).draw();
   }
   
 }

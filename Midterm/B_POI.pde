@@ -9,6 +9,7 @@ class POI{
   float lon;
   
   boolean Tree_Bool;
+  boolean Bench_Bool;
   
   String type;
   
@@ -23,7 +24,15 @@ class POI{
     PVector screenLocation = map.getScreenLocation(coord);
     noStroke();
     if (Tree_Bool) {
+      strokeWeight(3);
+      stroke(255, 0, 15);
       fill(tree_color);
+      circle(screenLocation.x, screenLocation.y, 10);
+    }
+    if (Bench_Bool) {
+      strokeWeight(3);
+      stroke(102, 51, 0);
+      fill(bench_color);
       circle(screenLocation.x, screenLocation.y, 10);
     }
   }
