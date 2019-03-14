@@ -1,4 +1,5 @@
 ArrayList<POI> pois;
+PImage benches;
 
 class POI{
   //coordinate
@@ -25,15 +26,12 @@ class POI{
     noStroke();
     if (Tree_Bool) {
       strokeWeight(3);
-      stroke(255, 0, 15);
+      stroke(tree_border);
       fill(tree_color);
       circle(screenLocation.x, screenLocation.y, 10);
     }
     if (Bench_Bool) {
-      strokeWeight(3);
-      stroke(102, 51, 0);
-      fill(bench_color);
-      circle(screenLocation.x, screenLocation.y, 10);
+      image(benches, screenLocation.x, screenLocation.y);
     }
   }
 }
