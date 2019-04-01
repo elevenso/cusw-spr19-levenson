@@ -1,5 +1,5 @@
 ArrayList<POI> pois;
-PImage benches;
+PImage benches, trees;
 
 class POI{
   //coordinate
@@ -25,10 +25,11 @@ class POI{
     PVector screenLocation = map.getScreenLocation(coord);
     noStroke();
     if (Tree_Bool) {
-      strokeWeight(3);
+      /**strokeWeight(3);
       stroke(tree_border);
       fill(tree_color);
-      circle(screenLocation.x, screenLocation.y, 10);
+      circle(screenLocation.x, screenLocation.y, 10);*/
+      image(trees, screenLocation.x, screenLocation.y);
     }
     if (Bench_Bool) {
       image(benches, screenLocation.x, screenLocation.y);

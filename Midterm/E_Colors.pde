@@ -13,9 +13,9 @@ void drawLegend(){
   fill(45);
   textFont(helvetica, 14);
   fill(tree_border);
-  text("Trees", width-180, 200);
+  text("Trees  -  't'", width-180, 200);
   fill(bench_border);
-  text("Benches", width-180, 225);
+  text("Benches  -  'b'", width-180, 225);
   fill(grass_border);
   text("Grass", width-180, 250);
 }

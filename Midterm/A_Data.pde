@@ -9,6 +9,9 @@ void loadData(){
   benches = loadImage("bench_image.png");
   benches.resize(20, 15);
   
+  trees = loadImage("tree_image.png");
+  trees.resize(15, 20); 
+  
   Park = loadJSONObject("civic_map.json");
   features = Park.getJSONArray("features");
 }

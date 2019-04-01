@@ -1,7 +1,9 @@
 MercatorMap map;
-PImage background;
+PImage background, object;
 PFont helvetica;
 PFont bold;
+boolean object_bool, add_bench, add_tree;
+PGraphics add_objects;
 //boolean Show_POIs;
 
 void setup(){
@@ -16,10 +18,13 @@ void setup(){
   helvetica = createFont("Helvetica", 16, true); 
   bold = createFont("Helvetica-Bold", 16, true);
   // print(PFont.list()); //uncomment for list of all available fonts
+  
+  //create Off Screen graphics (holding layers in "cloud")
+  add_objects = createGraphics(width, height);
 }
 
 void draw(){
-  fill(100);
+  fill(150);
   rect(width-200, 0, 200, height);
   image(background, 0, 0);
   fill(0, 100);
@@ -40,4 +45,40 @@ void draw(){
   drawLegend();
   drawInformation();
   
+  //draw layers on visible canvas in top left corner (origin)
+  image(add_objects, 0, 0); //
+  
+  if (add_bench){
+    object = benches;
+    object_bool = add_bench;
+    image(object, mouseX, mouseY);
+  }
+  
+  if (add_tree){
+    object = trees;
+    object_bool = add_tree;
+    image(object, mouseX, mouseY);
+  }
+  
+}
+
+void keyPressed(){
+  if (key == 'b'){
+    add_bench = true;
+    add_tree = false;
+  }
+  
+  if (key == 't'){
+    add_tree = true;
+    add_bench = false;
+  }
+}
+
+void mouseClicked(){
+  add_objects.beginDraw(); //add objects on layer off screen
+  if (object != null){
+    add_objects.image(object, mouseX, mouseY);
+    object_bool = false;
+  }
+  add_objects.endDraw(); //stop drawing on layer
 }
