@@ -1,5 +1,7 @@
 MercatorMap map;
 PImage background;
+PFont helvetica;
+PFont bold;
 //boolean Show_POIs;
 
 void setup(){
@@ -10,10 +12,14 @@ void setup(){
   ways = new ArrayList<Way>();
   loadData();
   parseData();
+  // establish font, true turns on anti-aliasing (removes jagged edges)
+  helvetica = createFont("Helvetica", 16, true); 
+  bold = createFont("Helvetica-Bold", 16, true);
+  // print(PFont.list()); //uncomment for list of all available fonts
 }
 
 void draw(){
-  fill(180);
+  fill(100);
   rect(width-200, 0, 200, height);
   image(background, 0, 0);
   fill(0, 100);
@@ -32,5 +38,6 @@ void draw(){
   }*/
   
   drawLegend();
+  drawInformation();
   
 }
