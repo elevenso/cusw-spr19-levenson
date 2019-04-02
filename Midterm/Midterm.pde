@@ -1,8 +1,10 @@
+// Next steps: add agents
+
 MercatorMap map;
 PImage background, object;
 PFont helvetica;
 PFont bold;
-boolean object_bool, add_bench, add_tree;
+boolean object_bool, add_bench, add_tree, clear;
 PGraphics add_objects;
 //boolean Show_POIs;
 
@@ -60,6 +62,13 @@ void draw(){
     image(object, mouseX, mouseY);
   }
   
+  if(clear){
+    add_objects.beginDraw();
+    add_objects.clear();
+    add_objects.endDraw();
+    clear = false;
+  }
+  
 }
 
 void keyPressed(){
@@ -72,6 +81,13 @@ void keyPressed(){
     add_tree = true;
     add_bench = false;
   }
+  
+  if (key == 'c'){
+    add_tree = false;
+    add_bench = false;
+    clear = true;
+  }
+  
 }
 
 void mouseClicked(){
