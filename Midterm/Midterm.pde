@@ -1,4 +1,43 @@
-// Next steps: add agents
+/* CIVIC CENTER PARK, BERKELEY, CA REDESIGN TOOL
+utilizes:
+ *  PATHFINDER AND NETWORK ALGORITHMS
+ *  Ira Winder, ira@mit.edu
+ *  Nina Lutz, nlutz@mit.edu
+ *  Coded w/ Processing 3 (Java)
+ *
+ *  The Main Tab "Tutoiral_3A_Agents" shows an example implementation of 
+ *  algorithms useful for finding shortest pathes snapped to a gridded or OSM-based 
+ *  network. Explore the various tabs to see how they work.
+ *
+ *  CLASSES CONTAINED:
+ *
+ *    Pathfinder() - Method to calculate shortest path between to nodes in a graph/network
+ *    Graph() - Network of nodes and wighted edges
+ *    Node() - Fundamental building block of Graph()
+ *    ObstacleCourse() - Contains multiple Obstacles; Allows editing, saving, and loading of configuration
+ *    Obstacle() - 2D polygon that can detect overlap events
+ *    MercatorMap() - translate lat-lon to screen coordinates
+ *    
+ *    Standard GIS shapes:
+ *    POI() - i.e. points, representing points of interest, etc
+ *    Way() - i.e. lines, representing streets, paths, etc
+ *    Polygons() - representing buildings, parcels, etc
+ *
+ *  FUNDAMENTAL OUTPUT: 
+ *
+ *    ArrayList<PVector> shortestPath = Pathfinder.findPath(PVector A, PVector B, boolean enable)
+ *
+ *  CLASS DEPENDENCY TREE: 
+ *
+ *
+ *     POI() / Way()  ->  Node()  ->      Graph()        ->      Pathfinder()  ->  OUTPUT: ArrayList<PVector> shortestPath
+ *
+ *                                            ^                                        |
+ *                                            |                                        v
+ *
+ *     Polygon()  ->  Obstacle()  ->  ObstacleCourse()                             Agent()                                   
+ *
+ */
 
 MercatorMap map;
 PImage background, object;
@@ -6,7 +45,26 @@ PFont helvetica;
 PFont bold;
 boolean object_bool, add_bench, add_tree, clear;
 PGraphics add_objects;
+int bench_counter = 4;
+int tree_counter = 1;
 //boolean Show_POIs;
+
+// A function to contain model initialization
+void initModel() {
+  
+  /* Step 1: Initialize Network Using ONLY ONE of these methods */
+  //randomNetwork(0.5); // a number between 0.0 and 1.0 specifies how 'porous' the network is
+  waysNetwork(ways);
+  //randomNetworkMinusBuildings(0.1, polygons); // a number between 0.0 and 1.0 specifies how 'porous' the network is
+  
+  /* Step 2: Initialize Paths Using ONLY ONE of these methods */
+  //randomPaths(1);
+  poiPaths(1);
+  
+  /* Step 3: Initialize Population */
+  initPopulation(30*paths.size());
+}
+
 
 void setup(){
   size(1205, 675);
@@ -16,6 +74,10 @@ void setup(){
   ways = new ArrayList<Way>();
   loadData();
   parseData();
+  
+  /* Initialize our model and simulation */
+  initModel();
+  
   // establish font, true turns on anti-aliasing (removes jagged edges)
   helvetica = createFont("Helvetica", 16, true); 
   bold = createFont("Helvetica-Bold", 16, true);
@@ -32,6 +94,7 @@ void draw(){
   fill(0, 100);
   rect(0, 0, width-200, height);
   
+  // Draw GIS Objects
   for(int i = 0; i<polygons.size(); i++){
     polygons.get(i).draw();
   }
@@ -40,33 +103,56 @@ void draw(){
     pois.get(i).draw();
   }
   
-  /**for (int i =0; i<ways.size(); i++){
+  /* for (int i =0; i<ways.size(); i++){
     ways.get(i).draw();
   }*/
   
+  /*  Displays the path properties.
+   *  FORMAT: display(color, alpha)
+   */
+  for (Path p: paths) {
+    p.display(100, 100);
+  }
+  
+  /*  Update and Display the population of agents
+   *  FORMAT: display(color, alpha)
+   */
+  boolean collisionDetection = true;
+  for (Agent p: people) {
+    p.update(personLocations(people), collisionDetection);
+    p.display(#FFFFFF, 255);
+  }
+  
+  //display information about the model on the screen
   drawLegend();
   drawInformation();
   
-  //draw layers on visible canvas in top left corner (origin)
+  //draw object layers on visible canvas in top left corner (origin)
   image(add_objects, 0, 0); //
   
+  //allows user to add a bench to map with a click
   if (add_bench){
     object = benches;
     object_bool = add_bench;
     image(object, mouseX, mouseY);
   }
   
+  //allows user to add a tree to map with a click
   if (add_tree){
     object = trees;
     object_bool = add_tree;
     image(object, mouseX, mouseY);
   }
   
+  //clears benches, trees
   if(clear){
     add_objects.beginDraw();
     add_objects.clear();
     add_objects.endDraw();
     clear = false;
+    bench_counter = 4;
+    tree_counter = 1;
+    initModel();
   }
   
 }
@@ -88,6 +174,10 @@ void keyPressed(){
     clear = true;
   }
   
+  if(key == 'i'){
+    initModel();
+}
+  
 }
 
 void mouseClicked(){
@@ -97,4 +187,16 @@ void mouseClicked(){
     object_bool = false;
   }
   add_objects.endDraw(); //stop drawing on layer
+  
+  //change number of people based on benches, trees
+  if (object == benches) {
+    bench_counter+=1;
+  }
+  
+  if (object == trees) {
+    tree_counter+=1;
+  }
+  
+  initModel();
+  
 }

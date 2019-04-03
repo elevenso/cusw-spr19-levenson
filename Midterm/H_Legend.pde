@@ -18,6 +18,8 @@ void drawLegend(){
   text("Benches  -  'b'", width-180, 225);
   fill(grass_border);
   text("Grass", width-180, 250);
+  fill(45);
+  text("Change students' path - 'i'", width-180, 275);
 }
 // could write a program to lay out lines instead of manually placing each line
 void drawInformation(){
@@ -32,6 +34,7 @@ void drawInformation(){
   text("plots to reduce the open space,", width-180, 140);
   text("and encourage high school", width-180, 155);
   text("kids to use the whole space.", width-180, 170);
+  text("Students: " + people.size(), width-180, 340);
   text("Emily Levenson", width-180, 380);
   text("11.S195", width-180, 400);
 }
