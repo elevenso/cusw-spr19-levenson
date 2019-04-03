@@ -1,4 +1,43 @@
-//From Tutorial_4B
+/* utilizes:
+ *  PATHFINDER AND NETWORK ALGORITHMS
+ *  Ira Winder, ira@mit.edu
+ *  Nina Lutz, nlutz@mit.edu
+ *  Coded w/ Processing 3 (Java)
+ *
+ *  The Main Tab "Tutoiral_3A_Agents" shows an example implementation of 
+ *  algorithms useful for finding shortest pathes snapped to a gridded or OSM-based 
+ *  network. Explore the various tabs to see how they work.
+ *
+ *  CLASSES CONTAINED:
+ *
+ *    Pathfinder() - Method to calculate shortest path between to nodes in a graph/network
+ *    Graph() - Network of nodes and wighted edges
+ *    Node() - Fundamental building block of Graph()
+ *    ObstacleCourse() - Contains multiple Obstacles; Allows editing, saving, and loading of configuration
+ *    Obstacle() - 2D polygon that can detect overlap events
+ *    MercatorMap() - translate lat-lon to screen coordinates
+ *    
+ *    Standard GIS shapes:
+ *    POI() - i.e. points, representing points of interest, etc
+ *    Way() - i.e. lines, representing streets, paths, etc
+ *    Polygons() - representing buildings, parcels, etc
+ *
+ *  FUNDAMENTAL OUTPUT: 
+ *
+ *    ArrayList<PVector> shortestPath = Pathfinder.findPath(PVector A, PVector B, boolean enable)
+ *
+ *  CLASS DEPENDENCY TREE: 
+ *
+ *
+ *     POI() / Way()  ->  Node()  ->      Graph()        ->      Pathfinder()  ->  OUTPUT: ArrayList<PVector> shortestPath
+ *
+ *                                            ^                                        |
+ *                                            |                                        v
+ *
+ *     Polygon()  ->  Obstacle()  ->  ObstacleCourse()                             Agent()                                   
+ *
+ */
+ //From Tutorial_4B
 
 // Objects to define our Network
 //
