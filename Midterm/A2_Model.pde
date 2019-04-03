@@ -131,19 +131,20 @@ void poiPaths(int numPaths) {
    */
    
   paths = new ArrayList<Path>();
-  for (int i=0; i<numPaths; i++) {
+  for (int i=0; i<numPaths; i++) { //make numPaths 5*(number trees+benches), could be random, use ArrayList.size()
     
     // Searches for valid paths only
     boolean notFound = true;
     while(notFound) {
       //  An example Origin and Desination between which we want to know the shortest path
       //
-      // Origin is Random POI
+      // Origin is Random POI //can draw POI origins
       int orig_index = int(random(pois.size()));
       PVector orig = pois.get(orig_index).coord;
       orig = map.getScreenLocation(orig);
       
       // Destination is Random POI
+      // make destinations benches, trees instead of random
       int dest_index = int(random(pois.size()));
       PVector dest = pois.get(dest_index).coord;
       dest = map.getScreenLocation(dest);

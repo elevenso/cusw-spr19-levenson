@@ -5,7 +5,7 @@ PImage background, object;
 PFont helvetica;
 PFont bold;
 boolean object_bool, add_bench, add_tree, clear;
-PGraphics add_objects;
+//PGraphics add_objects;
 int bench_counter = 4;
 int tree_counter = 1;
 //boolean Show_POIs;
@@ -45,9 +45,7 @@ void setup(){
   helvetica = createFont("Helvetica", 16, true); 
   bold = createFont("Helvetica-Bold", 16, true);
   // print(PFont.list()); //uncomment for list of all available fonts
-  
-  //create Off Screen graphics (holding layers in "cloud")
-  add_objects = createGraphics(width, height);
+
 }
 
 void draw(){
@@ -62,9 +60,9 @@ void draw(){
     polygons.get(i).draw();
   }
   
-  for (int i =0; i<pois.size(); i++){
+  /*for (int i =0; i<pois.size(); i++){
     pois.get(i).draw();
-  }
+  }*/
   
   /* for (int i =0; i<ways.size(); i++){
     ways.get(i).draw();
@@ -136,10 +134,6 @@ void keyPressed(){
     add_bench = false;
     clear = true;
   }
-  
-  if(key == 'i'){
-    initModel();
-}
   
 }
 

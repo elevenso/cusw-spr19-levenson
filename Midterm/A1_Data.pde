@@ -1,5 +1,8 @@
 JSONArray features;
 JSONObject Park;
+boolean Tree_Bool;
+boolean Bench_Bool;
+PGraphics add_objects;
 
 
 void loadData(){
@@ -17,6 +20,9 @@ void loadData(){
 }
 
 void parseData(){
+  
+  //create Off Screen graphics (holding layers in "cloud")
+  add_objects = createGraphics(width, height);
   
   for (int i=0; i< features.size(); i++){
     //Identify 3: properties, geometry, and type
@@ -54,13 +60,32 @@ void parseData(){
       
       POI tree = new POI(lat, lon);
       tree.type = natural;
-      if(natural.equals("tree")) tree.Tree_Bool = true;
+      if(natural.equals("tree")){
+        Tree_Bool = true;
+        // draw in PGraphics
+        add_objects.beginDraw();
+        PVector screenLocation_tree = map.getScreenLocation(tree.coord);
+        add_objects.image(trees, screenLocation_tree.x, screenLocation_tree.y);
+        add_objects.endDraw();
+      }
       pois.add(tree);
+      
+     
+      // add to array list
       
       POI bench = new POI(lat, lon);
       bench.type = amenity;
-      if(amenity.equals("bench")) bench.Bench_Bool = true;
+      if(amenity.equals("bench")){
+        Bench_Bool = true;
+        // draw in PImage
+        add_objects.beginDraw();
+        PVector screenLocation_bench = map.getScreenLocation(bench.coord);
+        add_objects.image(benches, screenLocation_bench.x, screenLocation_bench.y);
+        add_objects.endDraw();
+      }
       pois.add(bench);
+
+      // add to array list
     }
     
     if(type.equals("Polygon")){

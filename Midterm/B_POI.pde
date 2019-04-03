@@ -9,9 +9,6 @@ class POI{
   float lat;
   float lon;
   
-  boolean Tree_Bool;
-  boolean Bench_Bool;
-  
   String type;
   
   POI(float _lat, float _lon){
@@ -21,18 +18,20 @@ class POI{
   coord = new PVector(lat, lon);
   }
   
-  void draw() {
+  /*void draw() {
     PVector screenLocation = map.getScreenLocation(coord);
     noStroke();
     if (Tree_Bool) {
-      /**strokeWeight(3);
+      strokeWeight(3);
       stroke(tree_border);
       fill(tree_color);
-      circle(screenLocation.x, screenLocation.y, 10);*/
+      circle(screenLocation.x, screenLocation.y, 10);
       image(trees, screenLocation.x, screenLocation.y);
+      // add to array list
     }
     if (Bench_Bool) {
       image(benches, screenLocation.x, screenLocation.y);
+      // add to array list
     }
-  }
+  }*/
 }
