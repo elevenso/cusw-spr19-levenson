@@ -131,7 +131,7 @@ void initPopulation(int count) {
   // each bench adds two people, each tree adds 1
   int new_count = count;
   
-  println("initial count:" + new_count);
+  //println("initial count:" + new_count);
   
   for (int j = 0; j < bench_counter; j++) {
     new_count += 2;
@@ -142,8 +142,6 @@ void initPopulation(int count) {
     new_count += 1;
     // * println("tree adding count: " + new_count);
   }
-  
-  println("added count:" + new_count);
   
   //add agents
   for (int i = 0; i < new_count; i++) {
@@ -165,8 +163,7 @@ void initPopulation(int count) {
   }
   //reset count for next initialization, considering benches
   new_count = count;
-  println("reset count:" + new_count);
-  println("people:" + people.size());
+  println("people: " + people.size());
 }
 
 ArrayList<PVector> personLocations(ArrayList<Agent> people) {

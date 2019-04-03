@@ -62,7 +62,9 @@ void initModel() {
   poiPaths(1);
   
   /* Step 3: Initialize Population */
-  initPopulation(30*paths.size());
+  
+  //coefficient of paths.size() = starting number of people (if there were no trees/benches to start)
+  initPopulation(5*paths.size());
 }
 
 
