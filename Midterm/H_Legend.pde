@@ -10,7 +10,7 @@ void drawLegend(){
   rect(width-190, 20, 180, height-40, 10);
   fill(45);
   textFont(helvetica, 14);
-  text("Trees  -  't'\nBenches  -  'b'\nMap - 'm'\nClear - 'c'\n\nRegenerate students' path with a click or press 'r'!", width-180, 250, 160, 200);
+  text("'t' - Trees\n'b' - Benches\n'm' - Map\n'c' - Clear\n'r' - Regenerate paths", width-180, 250, 160, 200);
   textFont(bold,18);
   fill(45);
   text("Civic Center Park", width-180, 50);

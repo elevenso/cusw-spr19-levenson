@@ -19,12 +19,13 @@ void initModel() {
   waysNetwork(ways);
   
   /* Step 2: Initialize Paths */
-  poiPaths(3*object_list.size());
+  poiPaths(3); // 3 paths PER tree or bench;
   
   /* Step 3: Initialize Population */
   
   //coefficient of paths.size() = starting number of people (if there was one feature to start)
-  initPopulation(5*object_list.size());
+  //initPopulation(5*object_list.size());
+  initPopulation(0);
 }
 
 
@@ -146,19 +147,19 @@ void draw(){
   //display information about the model on the screen
   drawLegend();
   
-  if (keyPressed) {
-    fill(255);
-    text("Frame Rate: " + frameRate, 50, 50);
-  }
+  //if (keyPressed) {
+  //  fill(255);
+  //  text("Frame Rate: " + frameRate, 50, 50);
+  //}
   
 }
 
 void keyPressed(){
   if (key == 'b'){
-    add_bench = true;
+    add_bench = !add_bench;
     add_tree = false;
   } else if (key == 't'){
-    add_tree = true;
+    add_tree = !add_tree;
     add_bench = false;
   } else if (key == 'c'){
     add_tree = false;

@@ -131,29 +131,34 @@ void poiPaths(int numPaths) {
    */
    
   paths = new ArrayList<Path>();
-  for (int i=0; i<numPaths; i++) { //make numPaths 5*(number trees+benches), could be random, use ArrayList.size()
+  for (int j=0; j<object_list.size(); j++) {
     
-    // Searches for valid paths only
-    boolean notFound = true;
-    while(notFound) {
-      //  An example Origin and Desination between which we want to know the shortest path
-      //
-      // Origin is Random POI //can draw POI origins
-      int orig_index = int(random(pois.size()));
-      PVector orig = pois.get(orig_index).coord;
-      orig = map.getScreenLocation(orig);
+    for (int i=0; i<numPaths; i++) { //make numPaths for each tree and bench (numPaths*(tree+bench), pios are random but benches and trees are not, use ArrayList.size()
       
-      // make destinations benches, trees instead of random
-      int dest_index = int(random(object_list.size()));
-      PVector dest = object_list.get(dest_index);
-      
-      Path p = new Path(orig, dest);
-      p.solve(finder);
-      
-      if(p.waypoints.size() > 1) {
-        notFound = false;
-        paths.add(p);
-      }
+      // Searches for valid paths only
+      boolean notFound = true;
+      //while(notFound) { // Network file is not universally nivigatable, so this prevents infinite loop!
+        //  An example Origin and Desination between which we want to know the shortest path
+        //
+        // Origin is Random POI //can draw POI origins
+        int orig_index = int(random(pois.size()));
+        PVector orig = pois.get(orig_index).coord;
+        orig = map.getScreenLocation(orig);
+        
+        // make destinations benches, trees instead of random
+        //int dest_index = int(random(object_list.size()));
+        //PVector dest = object_list.get(dest_index);
+        PVector dest = object_list.get(j);
+        
+        Path p = new Path(orig, dest);
+        p.solve(finder);
+        
+        if(p.waypoints.size() > 1) {
+          notFound = false;
+          paths.add(p);
+        }
+        
+      //}
       
     }
     
@@ -169,12 +174,14 @@ void initPopulation(int count) {
   // each bench adds two people, each tree adds 1
   int new_count = count;
   
+  int scaler = 3; // amount to multiply people counter per bench/tree
+  
   for (int j = 0; j < bench_counter; j++) {
-    new_count += 2;
+    new_count += 2*scaler;
   }
   
   for (int k = 0; k < tree_counter; k++) {
-    new_count += 1;
+    new_count += 1*scaler;
   }
   
   //add agents
@@ -188,7 +195,7 @@ void initPopulation(int count) {
         int random_waypoint = int(random(random_path.waypoints.size()));
         float random_speed = random(0.1, 0.3);
         PVector loc = random_path.waypoints.get(random_waypoint);
-        Agent person = new Agent(loc.x, loc.y, 12, random_speed, random_path.waypoints);
+        Agent person = new Agent(loc.x, loc.y, 8, random_speed, random_path.waypoints);
         people.add(person);
       }
     //}
