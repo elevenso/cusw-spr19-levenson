@@ -143,11 +143,9 @@ void poiPaths(int numPaths) {
       PVector orig = pois.get(orig_index).coord;
       orig = map.getScreenLocation(orig);
       
-      // Destination is Random POI
       // make destinations benches, trees instead of random
-      int dest_index = int(random(pois.size()));
-      PVector dest = pois.get(dest_index).coord;
-      dest = map.getScreenLocation(dest);
+      int dest_index = int(random(object_list.size()));
+      PVector dest = object_list.get(dest_index);
       
       Path p = new Path(orig, dest);
       p.solve(finder);
@@ -196,7 +194,7 @@ void initPopulation(int count) {
         int random_waypoint = int(random(random_path.waypoints.size()));
         float random_speed = random(0.1, 0.3);
         PVector loc = random_path.waypoints.get(random_waypoint);
-        Agent person = new Agent(loc.x, loc.y, 5, random_speed, random_path.waypoints);
+        Agent person = new Agent(loc.x, loc.y, 9, random_speed, random_path.waypoints);
         people.add(person);
       }
     //}

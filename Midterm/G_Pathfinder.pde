@@ -40,8 +40,8 @@ class Path {
     // Draw Shortest Path
     //
     noFill();
-    strokeWeight(2);
-    stroke(#00FF00, alpha); // Green
+    strokeWeight(4);
+    stroke(#b5b3b3, alpha); // grey
     PVector n1, n2;
     for (int i=1; i<waypoints.size(); i++) {
       n1 = waypoints.get(i-1);
@@ -49,14 +49,14 @@ class Path {
       line(n1.x, n1.y, n2.x, n2.y);
     }
     
-    // Draw Origin (Red) and Destination (Blue)
+    /* Draw Origin (Red) and Destination (Blue)
     //
     fill(#FF0000); // Red
     ellipse(origin.x, origin.y, diameter, diameter);
     fill(#0000FF); // Blue
     ellipse(destination.x, destination.y, diameter, diameter);
     
-    strokeWeight(1);
+    strokeWeight(1);*/
   }
 }
 

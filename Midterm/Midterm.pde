@@ -2,13 +2,13 @@
 
 MercatorMap map;
 PImage background, object;
-PFont helvetica;
-PFont bold;
-boolean object_bool, add_bench, add_tree, clear;
+PFont helvetica, bold;
+boolean object_bool, add_bench, add_tree, clear, background_bool = true;
 //PGraphics add_objects;
 int bench_counter = 4;
 int tree_counter = 1;
 //boolean Show_POIs;
+ArrayList<PVector> object_list = new ArrayList<PVector>();
 
 // A function to contain model initialization
 void initModel() {
@@ -20,12 +20,12 @@ void initModel() {
   
   /* Step 2: Initialize Paths Using ONLY ONE of these methods */
   //randomPaths(1);
-  poiPaths(1);
+  poiPaths(3*object_list.size());
   
   /* Step 3: Initialize Population */
   
   //coefficient of paths.size() = starting number of people (if there were no trees/benches to start)
-  initPopulation(5*paths.size());
+  initPopulation(5*object_list.size());
 }
 
 
@@ -51,8 +51,8 @@ void setup(){
 void draw(){
   fill(150);
   rect(width-200, 0, 200, height);
-  image(background, 0, 0);
-  fill(0, 100);
+  if (background_bool) image(background, 0, 0);
+  fill(0, 120);
   rect(0, 0, width-200, height);
   
   // Draw GIS Objects
@@ -64,15 +64,15 @@ void draw(){
     pois.get(i).draw();
   }*/
   
-  /* for (int i =0; i<ways.size(); i++){
+  for (int i =0; i<ways.size(); i++){
     ways.get(i).draw();
-  }*/
+  }
   
   /*  Displays the path properties.
    *  FORMAT: display(color, alpha)
    */
   for (Path p: paths) {
-    p.display(100, 100);
+    p.display(#b5b3b3, 100);
   }
   
   /*  Update and Display the population of agents
@@ -81,12 +81,8 @@ void draw(){
   boolean collisionDetection = true;
   for (Agent p: people) {
     p.update(personLocations(people), collisionDetection);
-    p.display(#FFFFFF, 255);
+    p.display(#FFFFFF, 200);
   }
-  
-  //display information about the model on the screen
-  drawLegend();
-  drawInformation();
   
   //draw object layers on visible canvas in top left corner (origin)
   image(add_objects, 0, 0); //
@@ -109,12 +105,19 @@ void draw(){
   if(clear){
     add_objects.beginDraw();
     add_objects.clear();
+    for (int object=0; object<original_object_list.size(); object++){
+      add_objects.image(benches, original_object_list.get(object).x, original_object_list.get(object).y);
+    }
     add_objects.endDraw();
     clear = false;
     bench_counter = 4;
     tree_counter = 1;
     initModel();
   }
+  
+  //display information about the model on the screen
+  drawLegend();
+  drawInformation();
   
 }
 
@@ -133,6 +136,13 @@ void keyPressed(){
     add_tree = false;
     add_bench = false;
     clear = true;
+    object_list = original_object_list;
+  }
+  
+  if (key == 'm'){
+    if (background_bool) background_bool = false;
+    else background_bool = true;
+    
   }
   
 }
@@ -148,10 +158,12 @@ void mouseClicked(){
   //change number of people based on benches, trees
   if (object == benches) {
     bench_counter+=1;
+    object_list.add(new PVector(mouseX, mouseY));
   }
   
   if (object == trees) {
     tree_counter+=1;
+    object_list.add(new PVector(mouseX, mouseY));
   }
   
   initModel();

@@ -3,6 +3,7 @@ JSONObject Park;
 boolean Tree_Bool;
 boolean Bench_Bool;
 PGraphics add_objects;
+ArrayList<PVector> original_object_list = new ArrayList<PVector>();
 
 
 void loadData(){
@@ -10,10 +11,10 @@ void loadData(){
   background.resize(width-200, height);
   
   benches = loadImage("bench_image.png");
-  benches.resize(20, 15);
+  benches.resize(30, 22);
   
   trees = loadImage("tree_image.png");
-  trees.resize(15, 20); 
+  trees.resize(22, 30); 
   
   Park = loadJSONObject("civic_map.json");
   features = Park.getJSONArray("features");
@@ -67,11 +68,9 @@ void parseData(){
         PVector screenLocation_tree = map.getScreenLocation(tree.coord);
         add_objects.image(trees, screenLocation_tree.x, screenLocation_tree.y);
         add_objects.endDraw();
-      }
-      pois.add(tree);
-      
-     
-      // add to array list
+        object_list.add(map.getScreenLocation(tree.coord));
+       }
+       pois.add(tree);
       
       POI bench = new POI(lat, lon);
       bench.type = amenity;
@@ -82,10 +81,9 @@ void parseData(){
         PVector screenLocation_bench = map.getScreenLocation(bench.coord);
         add_objects.image(benches, screenLocation_bench.x, screenLocation_bench.y);
         add_objects.endDraw();
+        original_object_list.add(map.getScreenLocation(bench.coord));
       }
-      pois.add(bench);
-
-      // add to array list
+      
     }
     
     if(type.equals("Polygon")){
