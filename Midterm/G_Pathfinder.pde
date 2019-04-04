@@ -41,7 +41,7 @@ class Path {
     //
     noFill();
     strokeWeight(4);
-    stroke(#efe5a5, alpha); // yellow
+    stroke(col, alpha);
     PVector n1, n2;
     for (int i=1; i<waypoints.size(); i++) {
       n1 = waypoints.get(i-1);

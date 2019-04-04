@@ -22,9 +22,10 @@ class Polygon{
   void makeShape(){
     p = createShape();
     p.beginShape();
-    p.fill(grass_color);
-    p.strokeWeight(3);
-    p.stroke(grass_border);
+    p.fill(grass_color, 150);
+    p.noStroke();
+    //p.strokeWeight(3);
+    //p.stroke(grass_border);
     for(int i = 0; i<coordinates.size(); i++){
         PVector screenLocation = map.getScreenLocation(coordinates.get(i));
         p.vertex(screenLocation.x, screenLocation.y);

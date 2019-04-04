@@ -20,9 +20,9 @@ class POI{
   
   void draw() {
     PVector screenLocation = map.getScreenLocation(coord);
-    strokeWeight(1);
-    stroke(255);
-    fill(255, 0, 0);
+    strokeWeight(3);
+    stroke(150);
+    fill(#990000);
     circle(screenLocation.x, screenLocation.y, 10);
     /*if (Tree_Bool) {
       strokeWeight(3);

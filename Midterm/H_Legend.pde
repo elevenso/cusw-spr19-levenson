@@ -5,7 +5,8 @@ color grass_border = color(111, 220, 111);
 
 //add legend in grey box to the right side, instructions, description
 void drawLegend(){
-  fill(245);
+  noStroke();
+  fill(245, 200);
   rect(width-190, 20, 180, height-40, 10);
   fill(45);
   textFont(helvetica, 14);

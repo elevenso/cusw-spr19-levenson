@@ -48,30 +48,41 @@ void setup(){
 }
 
 void draw(){
-  fill(150);
-  rect(width-200, 0, 200, height);
+  
+  //fill(150);
+  //rect(width-200, 0, 200, height);
+  background(0); // This has 
   
   //background controlled with key 'm'
-  if (background_bool) image(background, 0, 0);
+  if (background_bool) {
+    tint(255, 120); // makes background transparent
+    image(background, 0, 0);
+    tint(255);
+  }
  
-  fill(0, 120);
-  rect(0, 0, width-200, height);
+  // Ira: Same Effect can be accomlished with "tint()" method as above
+  //fill(0, 120);
+  //rect(0, 0, width-200, height);
   
   // Draw GIS Objects
   for(int i = 0; i<polygons.size(); i++){
     polygons.get(i).draw();
   }
   
-  for (int i =0; i<ways.size(); i++){
-    ways.get(i).draw();
-  }
+  //for (int i =0; i<ways.size(); i++){
+  //  ways.get(i).draw();
+  //}
+  // Drawing the background graph this way is much less "intense"
+  tint(255, 100);
+  image(network.img, 0, 0);
+  tint(255);
   
   
   /*  Displays the path properties.
    *  FORMAT: display(color, alpha)
    */
   for (Path p: paths) {
-    p.display(#efe5a5, 255); //light yellow
+    p.display(#FFFF00, 50); //bright yellow
   }
   
   for (int i =0; i<pois.size(); i++){
@@ -83,10 +94,10 @@ void draw(){
    */
    
    
-  boolean collisionDetection = true;
+  boolean collisionDetection = false;
   for (Agent p: people) {
     p.update(personLocations(people), collisionDetection);
-    p.display(#FFFFFF, 255); //white
+    p.display(#FFFFFF, 200); //white
   }
   
   //draw object layers on visible canvas in top left corner (origin)
@@ -130,11 +141,15 @@ void draw(){
     //restard model
     initModel();
     clear = false;
-    println("Frame Rate: " + frameRate);
   }
   
   //display information about the model on the screen
   drawLegend();
+  
+  if (keyPressed) {
+    fill(255);
+    text("Frame Rate: " + frameRate, 50, 50);
+  }
   
 }
 

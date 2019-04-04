@@ -188,7 +188,7 @@ void initPopulation(int count) {
         int random_waypoint = int(random(random_path.waypoints.size()));
         float random_speed = random(0.1, 0.3);
         PVector loc = random_path.waypoints.get(random_waypoint);
-        Agent person = new Agent(loc.x, loc.y, 9, random_speed, random_path.waypoints);
+        Agent person = new Agent(loc.x, loc.y, 12, random_speed, random_path.waypoints);
         people.add(person);
       }
     //}

@@ -251,15 +251,19 @@ class Graph {
     //
     img.noFill();
     img.stroke(col, alpha);
-    img.strokeWeight(1);
+    img.strokeWeight(10);
     
+    /*
     // Draws Tangent Circles Centered at pathfinding nodes
     //
     Node n;
     for (int i=0; i<nodes.size(); i++) {
       n = nodes.get(i);
-      img.ellipse(n.loc.x, n.loc.y, SCALE, SCALE);
+      //img.ellipse(n.loc.x, n.loc.y, SCALE, SCALE);
+      img.ellipse(n.loc.x, n.loc.y, 3, 3);
     }
+    */
+    
     
     // Draws Edges that Connect Nodes
     //
