@@ -157,23 +157,23 @@ void keyPressed(){
   if (key == 'b'){
     add_bench = true;
     add_tree = false;
-  }
-  
-  if (key == 't'){
+  } else if (key == 't'){
     add_tree = true;
     add_bench = false;
-  }
-  
-  if (key == 'c'){
+  } else if (key == 'c'){
     add_tree = false;
     add_bench = false;
     clear = true;
-  }
-  
-  if (key == 'm'){
+  } else if (key == 'm'){
     if (background_bool) background_bool = false;
     else background_bool = true;
-    
+  } else if (key == 'r') {
+    // Regenerate paths if r key is pressed
+    initModel();
+  } else {
+    // allows user to press any other key to deselect bench and tree
+    add_bench = false;
+    add_tree = false;
   }
   
 }
