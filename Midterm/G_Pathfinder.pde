@@ -41,22 +41,13 @@ class Path {
     //
     noFill();
     strokeWeight(4);
-    stroke(#b5b3b3, alpha); // grey
+    stroke(#efe5a5, alpha); // yellow
     PVector n1, n2;
     for (int i=1; i<waypoints.size(); i++) {
       n1 = waypoints.get(i-1);
       n2 = waypoints.get(i);
       line(n1.x, n1.y, n2.x, n2.y);
     }
-    
-    /* Draw Origin (Red) and Destination (Blue)
-    //
-    fill(#FF0000); // Red
-    ellipse(origin.x, origin.y, diameter, diameter);
-    fill(#0000FF); // Blue
-    ellipse(destination.x, destination.y, diameter, diameter);
-    
-    strokeWeight(1);*/
   }
 }
 

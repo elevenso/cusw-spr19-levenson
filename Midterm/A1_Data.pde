@@ -68,6 +68,7 @@ void parseData(){
         PVector screenLocation_tree = map.getScreenLocation(tree.coord);
         add_objects.image(trees, screenLocation_tree.x, screenLocation_tree.y);
         add_objects.endDraw();
+        original_object_list.add(map.getScreenLocation(tree.coord));
         object_list.add(map.getScreenLocation(tree.coord));
        }
        pois.add(tree);
@@ -82,7 +83,9 @@ void parseData(){
         add_objects.image(benches, screenLocation_bench.x, screenLocation_bench.y);
         add_objects.endDraw();
         original_object_list.add(map.getScreenLocation(bench.coord));
+        object_list.add(map.getScreenLocation(bench.coord));
       }
+      pois.add(bench);
       
     }
     
@@ -99,8 +102,10 @@ void parseData(){
       }
       Polygon grass = new Polygon(coords);
       grass.type = landuse;
-      if(landuse.equals("grass")) grass.Grass_Bool = true;
-      polygons.add(grass);
+      if(landuse.equals("grass")) {
+        grass.Grass_Bool = true;
+        polygons.add(grass);
+      }
     }
     
     if(type.equals("LineString")){
@@ -116,8 +121,6 @@ void parseData(){
       }
       //Create the Way with the coordinate PVectors
       Way footway = new Way(coords);
-      footway.type = highway;
-      if(highway.equals("footway")) footway.Footway_Bool = true;
       ways.add(footway);
     }
   }

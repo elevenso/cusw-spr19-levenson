@@ -18,10 +18,13 @@ class POI{
   coord = new PVector(lat, lon);
   }
   
-  /*void draw() {
+  void draw() {
     PVector screenLocation = map.getScreenLocation(coord);
-    noStroke();
-    if (Tree_Bool) {
+    strokeWeight(1);
+    stroke(255);
+    fill(255, 0, 0);
+    circle(screenLocation.x, screenLocation.y, 10);
+    /*if (Tree_Bool) {
       strokeWeight(3);
       stroke(tree_border);
       fill(tree_color);
@@ -32,6 +35,6 @@ class POI{
     if (Bench_Bool) {
       image(benches, screenLocation.x, screenLocation.y);
       // add to array list
-    }
-  }*/
+    }*/
+  }
 }

@@ -131,7 +131,8 @@ class Agent {
   
   void display(color col, int alpha) {
     fill(col, alpha);
-    noStroke();
+    strokeWeight(1);
+    stroke(0);
     ellipse(location.x, location.y, r, r);
   }
 }

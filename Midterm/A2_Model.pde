@@ -169,22 +169,16 @@ void initPopulation(int count) {
   // each bench adds two people, each tree adds 1
   int new_count = count;
   
-  //println("initial count:" + new_count);
-  
   for (int j = 0; j < bench_counter; j++) {
     new_count += 2;
-    // * println("bench adding count: " + new_count);
   }
   
   for (int k = 0; k < tree_counter; k++) {
     new_count += 1;
-    // * println("tree adding count: " + new_count);
   }
   
   //add agents
   for (int i = 0; i < new_count; i++) {
-    // * get all paths
-    // for (int j = 0; j < paths.size(); j++) {
       // Path random_path = paths.get(j);
     // * picks a random number to index from length of paths
      int random_index = int(random(paths.size()));

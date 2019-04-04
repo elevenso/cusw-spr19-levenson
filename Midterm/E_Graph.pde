@@ -465,7 +465,7 @@ class Obstacle {
     
     if (editOb) {
       if (editCourse && polyCorners > 0) {
-        stroke(#b5b3b3, alpha);
+        stroke(#efe5a5, alpha); //light yellow
         ellipse(v.get(index).x, v.get(index).y, 30, 30);
       } if (editCourse && polyCorners > 1) {
         line(v.get(index).x, v.get(index).y, v.get(afterIndex()).x, v.get(afterIndex()).y);

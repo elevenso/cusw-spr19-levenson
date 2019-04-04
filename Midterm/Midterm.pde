@@ -4,27 +4,26 @@ MercatorMap map;
 PImage background, object;
 PFont helvetica, bold;
 boolean object_bool, add_bench, add_tree, clear, background_bool = true;
+
 //PGraphics add_objects;
 int bench_counter = 4;
 int tree_counter = 1;
-//boolean Show_POIs;
+
+//list to hold all trees and benches currently on map
 ArrayList<PVector> object_list = new ArrayList<PVector>();
 
 // A function to contain model initialization
 void initModel() {
   
-  /* Step 1: Initialize Network Using ONLY ONE of these methods */
-  //randomNetwork(0.5); // a number between 0.0 and 1.0 specifies how 'porous' the network is
+  /* Step 1: Initialize Network */
   waysNetwork(ways);
-  //randomNetworkMinusBuildings(0.1, polygons); // a number between 0.0 and 1.0 specifies how 'porous' the network is
   
-  /* Step 2: Initialize Paths Using ONLY ONE of these methods */
-  //randomPaths(1);
+  /* Step 2: Initialize Paths */
   poiPaths(3*object_list.size());
   
   /* Step 3: Initialize Population */
   
-  //coefficient of paths.size() = starting number of people (if there were no trees/benches to start)
+  //coefficient of paths.size() = starting number of people (if there was one feature to start)
   initPopulation(5*object_list.size());
 }
 
@@ -51,7 +50,10 @@ void setup(){
 void draw(){
   fill(150);
   rect(width-200, 0, 200, height);
+  
+  //background controlled with key 'm'
   if (background_bool) image(background, 0, 0);
+ 
   fill(0, 120);
   rect(0, 0, width-200, height);
   
@@ -60,28 +62,31 @@ void draw(){
     polygons.get(i).draw();
   }
   
-  /*for (int i =0; i<pois.size(); i++){
-    pois.get(i).draw();
-  }*/
-  
   for (int i =0; i<ways.size(); i++){
     ways.get(i).draw();
   }
+  
   
   /*  Displays the path properties.
    *  FORMAT: display(color, alpha)
    */
   for (Path p: paths) {
-    p.display(#b5b3b3, 100);
+    p.display(#efe5a5, 255); //light yellow
+  }
+  
+  for (int i =0; i<pois.size(); i++){
+    pois.get(i).draw();
   }
   
   /*  Update and Display the population of agents
    *  FORMAT: display(color, alpha)
    */
+   
+   
   boolean collisionDetection = true;
   for (Agent p: people) {
     p.update(personLocations(people), collisionDetection);
-    p.display(#FFFFFF, 200);
+    p.display(#FFFFFF, 255); //white
   }
   
   //draw object layers on visible canvas in top left corner (origin)
@@ -102,22 +107,34 @@ void draw(){
   }
   
   //clears benches, trees
-  if(clear){
+  if (clear){
     add_objects.beginDraw();
     add_objects.clear();
-    for (int object=0; object<original_object_list.size(); object++){
+    
+    //return original objects
+    for (int object=0; object<original_object_list.size()-1; object++){
       add_objects.image(benches, original_object_list.get(object).x, original_object_list.get(object).y);
     }
+    add_objects.image(trees, original_object_list.get(4).x, original_object_list.get(4).y);
     add_objects.endDraw();
-    clear = false;
+    
+    //removes all old objects from object list
+    for (int i = object_list.size()-1; i > 4; i--) {
+      object_list.remove(i);
+    }
+    
+    //makes sure number of people reflects number of objects
     bench_counter = 4;
     tree_counter = 1;
+    
+    //restard model
     initModel();
+    clear = false;
+    println("Frame Rate: " + frameRate);
   }
   
   //display information about the model on the screen
   drawLegend();
-  drawInformation();
   
 }
 
@@ -136,7 +153,6 @@ void keyPressed(){
     add_tree = false;
     add_bench = false;
     clear = true;
-    object_list = original_object_list;
   }
   
   if (key == 'm'){
@@ -149,10 +165,12 @@ void keyPressed(){
 
 void mouseClicked(){
   add_objects.beginDraw(); //add objects on layer off screen
+  
   if (object != null){
     add_objects.image(object, mouseX, mouseY);
     object_bool = false;
   }
+  
   add_objects.endDraw(); //stop drawing on layer
   
   //change number of people based on benches, trees
