@@ -17,7 +17,7 @@ void drawLegend(){
   textFont(helvetica, 16);
   text("Berkeley, CA", width-180, 75);
   textSize(14);
-  text("Help this park be more welcoming! Add benches and trees to reduce the open space, and encourage high school kids to use the whole space.", width-180, 95, 160, 200); //last two parameters are width, height of text box
+  text("Help this park be more welcoming! Add benches and trees to reduce the open space, and encourage high school kids to hang out here.", width-180, 95, 160, 200); //last two parameters are width, height of text box
   text("Students: " + people.size(), width-180, 410);
   text("Emily Levenson", width-180, height-60);
   text("11.S195", width-180, height-40);

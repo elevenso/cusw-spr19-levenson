@@ -3,7 +3,7 @@
 MercatorMap map;
 PImage background, object;
 PFont helvetica, bold;
-boolean object_bool, add_bench, add_tree, clear, background_bool = true;
+boolean object_bool, add_bench, add_tree, clear, frame_rate = false, background_bool = true;
 
 //PGraphics add_objects;
 int bench_counter = 4;
@@ -49,10 +49,7 @@ void setup(){
 }
 
 void draw(){
-  
-  //fill(150);
-  //rect(width-200, 0, 200, height);
-  background(0); // This has 
+  background(0);
   
   //background controlled with key 'm'
   if (background_bool) {
@@ -60,10 +57,7 @@ void draw(){
     image(background, 0, 0);
     tint(255);
   }
- 
-  // Ira: Same Effect can be accomlished with "tint()" method as above
-  //fill(0, 120);
-  //rect(0, 0, width-200, height);
+
   
   // Draw GIS Objects
   for(int i = 0; i<polygons.size(); i++){
@@ -120,6 +114,8 @@ void draw(){
   
   //clears benches, trees
   if (clear){
+    frame_rate = false;
+    object = null;
     add_objects.beginDraw();
     add_objects.clear();
     
@@ -139,7 +135,7 @@ void draw(){
     bench_counter = 4;
     tree_counter = 1;
     
-    //restard model
+    //restart model
     initModel();
     clear = false;
   }
@@ -147,11 +143,11 @@ void draw(){
   //display information about the model on the screen
   drawLegend();
   
-  //if (keyPressed) {
-  //  fill(255);
-  //  text("Frame Rate: " + frameRate, 50, 50);
-  //}
-  
+  //display frame rate in legend
+  if (frame_rate) {
+    fill(45);
+    text("Frame Rate: " + frameRate, width-180, 450);
+  }
 }
 
 void keyPressed(){
@@ -171,10 +167,13 @@ void keyPressed(){
   } else if (key == 'r') {
     // Regenerate paths if r key is pressed
     initModel();
+  } else if (key == 'f') {
+    frame_rate = true;
   } else {
     // allows user to press any other key to deselect bench and tree
     add_bench = false;
     add_tree = false;
+    object = null;
   }
   
 }
