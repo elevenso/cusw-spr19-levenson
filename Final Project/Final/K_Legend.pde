@@ -59,7 +59,4 @@ void drawLegend(){
   text("Berkeley, CA", width-180, 80);
   button();
   
-  if (area_bool == false){
-    text("Error: Too little open space", width-180, height-100);
-  }
 }

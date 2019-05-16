@@ -140,7 +140,7 @@ void draw() {
   }
   
   
-  if (frame_rate == true & infoOver == false & warningOver == false) {
+  if (frame_rate == true & infoOver == false & warningOver == false & area_bool == true) {
     textSize(16);
     fill(45);
      text("Frame Rate: " + frameRate, width-180, 415);
@@ -202,9 +202,10 @@ void mouseClicked(){
     edge_list.add(new PVector(mouseX, mouseY));
     calc_new_area();
   }
+  }
   if (overPlay(playX, playY, circleSize)){
     clicked = true;
   }
   initModel();
-  }
+  
 }

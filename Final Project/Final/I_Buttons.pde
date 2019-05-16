@@ -53,8 +53,19 @@ void button(){
     information.rect(width-180, height-350, 160, 250, 10);
     information.fill(200);
     information.textSize(14);
-    information.text("Don't cut off too much space or else there won't be room for festivals and sports.", width-170, height-330, 140, 200); //last two parameters are width, height of text box
+    information.text("Don't cut off too much open space or else there won't be room for festivals and sports.", width-170, height-330, 140, 200); //last two parameters are width, height of text box
     information.endDraw();
+    }
+    else if (area_bool == false){
+    information.beginDraw();
+    information.noStroke();
+    information.fill(45, 200);
+    information.rect(width-180, height-350, 160, 250, 10);
+    information.fill(200);
+    information.textSize(14);
+    information.text("Error: Not enough open space! Try clearing the map and trying again.", width-170, height-330, 140, 200);
+    information.endDraw();
+    warningOver = false;
     }
     else{
     information.beginDraw();

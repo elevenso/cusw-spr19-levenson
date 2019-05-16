@@ -45,9 +45,7 @@ class Polygon{
 }
 
 void area(){
-    /*for (int i =0; i<polygons.get(3).coordinates.size(); i++){
-     println(polygons.get(3).coordinates);
-     }*/
+  
     vertices = (polygons.get(3).coordinates);
     screen_vertices= new ArrayList<PVector>();
     for(int i = 0; i<polygons.get(3).coordinates.size(); i++){
@@ -58,4 +56,5 @@ void area(){
        area += (screen_vertices.get(i).x * screen_vertices.get(i-1).y - screen_vertices.get(i).y*screen_vertices.get(i-1).x);
     }
     println("area: " + area/2);
+    
   }
