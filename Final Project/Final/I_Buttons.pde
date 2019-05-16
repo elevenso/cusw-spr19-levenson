@@ -38,32 +38,33 @@ void button(){
     information.beginDraw();
     information.noStroke();
     information.fill(45, 200);
-    information.rect(width-180, height-350, 160, 250, 10);
+    information.rect(width-180, height-340, 160, 250, 10);
     information.fill(200);
     information.textSize(14);
-    information.text("Help this park be more welcoming! Add benches and trees to reduce the open space, and encourage high school kids to hang out here.", width-170, height-330, 140, 200); //last two parameters are width, height of text box
-    information.text("Emily Levenson", width-170, height-145);
-    information.text("11.S195", width-170, height-125);
+    information.text("Help this park be more welcoming! Add benches and trees to reduce the open space, and encourage high school kids to hang out here.", width-170, height-320, 140, 200); //last two parameters are width, height of text box
+    information.textSize(11);
+    information.text("Emily Levenson", width-170, height-130);
+    information.text("11.S195", width-170, height-110);
     information.endDraw();
     }
     else if (warningOver){
     information.beginDraw();
     information.noStroke();
     information.fill(45, 200);
-    information.rect(width-180, height-350, 160, 250, 10);
+    information.rect(width-180, height-340, 160, 250, 10);
     information.fill(200);
     information.textSize(14);
-    information.text("Don't cut off too much open space or else there won't be room for festivals and sports.", width-170, height-330, 140, 200); //last two parameters are width, height of text box
+    information.text("Don't cut off too much open space or else there won't be room for festivals and sports.", width-170, height-320, 140, 200); //last two parameters are width, height of text box
     information.endDraw();
     }
     else if (area_bool == false){
     information.beginDraw();
     information.noStroke();
     information.fill(45, 200);
-    information.rect(width-180, height-350, 160, 250, 10);
+    information.rect(width-180, height-340, 160, 250, 10);
     information.fill(200);
     information.textSize(14);
-    information.text("Error: Not enough open space! Try clearing the map and trying again.", width-170, height-330, 140, 200);
+    information.text("Error: Not enough open space! Try clearing the map and trying again.", width-170, height-320, 140, 200);
     information.endDraw();
     warningOver = false;
     }

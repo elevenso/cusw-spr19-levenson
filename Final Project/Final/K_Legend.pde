@@ -11,17 +11,17 @@ void drawLegend(){
     rect(width-180, height-640, 160, 250, 10);
     fill(255);
     textFont(bold, 27);
-    text("Key:", margin, height-600);
-    image(stars, margin, height-580);
+    text("Key:", margin, height-603);
+    image(stars, margin, height-583);
     textFont(helvetica, 14);
-    text("Points of Interest", margin2, height-560);
+    text("Points of Interest", margin2, height-563);
 
-    image(trees, margin, height-540);
-    text("'t' - Trees", margin2, height-520);
+    image(trees, margin, height-543);
+    text("'t' - Trees", margin2, height-523);
     
-    image(benches, margin, height-485);
-    text("'b' - Benches", margin2, height-470);
-    text("'m' - Map\n'c' - Clear\n'f' - Frame Rate", margin, height-450, 160, 200);
+    image(benches, margin, height-488);
+    text("'b' - Benches", margin2, height-473);
+    text("'m' - Map\n'c' - Clear\n'f' - Frame Rate", margin+5, height-453, 160, 200);
     if (playOver == true){
       //population slider - only visible when population simulation running
       fill(#27408b, 100); //light blue

@@ -23,7 +23,6 @@ void calc_new_area(){
     for (int i = 1; i<(edge_list.size()-1); i++) {
          new_area += (edge_list.get(i).x * edge_list.get(i-1).y - edge_list.get(i).y*edge_list.get(i-1).x);
       }
-      new_area += (edge_list.get(edge_list.size()-1).x*edge_list.get(0).y-edge_list.get(edge_list.size()-1).y*edge_list.get(0).x);
       println("new area: " + new_area/2);
   }*/
 
