@@ -22,24 +22,29 @@ void drawLegend(){
     image(benches, margin, height-485);
     text("'b' - Benches", margin2, height-470);
     text("'m' - Map\n'c' - Clear\n'f' - Frame Rate", margin, height-450, 160, 200);
-    textSize(16);
-    fill(45);
     if (playOver == true){
-      text("Visitors: " + people.size(), width-180, 380);
+      //population slider - only visible when population simulation running
+      fill(#27408b, 100); //light blue
+      rect(width-180, 368, 160, 25, 10);
+      fill(#436eee); //dark blue, drop shadow color
+      rect(width-180, 368, 1.6*people.size(), 25, 10);
+      textSize(16);
+      fill(255);
+      text("Visitors: " + people.size(), width-173, 385);
     }
     
   //information buttons
     fill(#27408b, 100); //drop shadow blue
     circle(infoX+3, infoY+3, 35);
-    fill(#436eee);
+    fill(#436eee); //light blue
     circle(infoX, infoY, 35);
     fill(#8b0000, 100); //drop shadow red
     circle(warningX+3, warningY+3, 35);
-    fill(#cd0000);
+    fill(#cd0000); //red
     circle(warningX, warningY, 35);
     fill(#8b8b00, 97); //drop shadow green
     circle(playX+3, playY+3, 35);
-    fill(#7ba428);
+    fill(#7ba428); //green
     circle(playX, playY, 35);
     fill(255);
     textFont(bold, 27);
@@ -53,4 +58,8 @@ void drawLegend(){
   textFont(helvetica, 16);
   text("Berkeley, CA", width-180, 80);
   button();
+  
+  if (area_bool == false){
+    text("Error: Too little open space", width-180, height-100);
+  }
 }

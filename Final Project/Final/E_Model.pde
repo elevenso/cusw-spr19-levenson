@@ -113,7 +113,9 @@ void initPopulation(int count) {
         float random_speed = random(0.1, 0.3);
         PVector loc = random_path.waypoints.get(random_waypoint);
         Agent person = new Agent(loc.x, loc.y, 8, random_speed, random_path.waypoints);
-        people.add(person);
+        if (people.size() < 100){ //max population is 100
+          people.add(person);
+        }
       }
     //}
   }

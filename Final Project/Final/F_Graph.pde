@@ -1,5 +1,5 @@
 //From Tutorial_4B
-//did not include applyObstacleCourse, cullRandom, Obstacle class
+//did not include applypackingCourse, cullRandom, packing class
 
 class Node {
   PVector loc;
@@ -236,7 +236,6 @@ class Graph {
       //img.ellipse(n.loc.x, n.loc.y, SCALE, SCALE);
       img.ellipse(n.loc.x, n.loc.y, 3, 3);
     }
-    
     
     
     // Draws Edges that Connect Nodes

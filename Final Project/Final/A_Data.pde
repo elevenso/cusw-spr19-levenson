@@ -57,6 +57,12 @@ void parseData(){
     if (dataHighway != null) highway = dataHighway;
     else highway = "";
     
+    //landuse to find grass
+    String dataLanduse = properties.getJSONObject("tags").getString("landuse");
+    String landuse = properties.getJSONObject("tags").getString("landuse");
+    if (dataLanduse != null) landuse = dataLanduse;
+    else landuse = "";
+    
     if(type.equals("Point")){
       float lat = geometry.getJSONArray("coordinates").getFloat(1);
       float lon = geometry.getJSONArray("coordinates").getFloat(0);
@@ -75,6 +81,25 @@ void parseData(){
         object_list.add(map.getScreenLocation(bench.coord));
       }
       pois.add(bench);
+    }
+    
+    if(type.equals("Polygon")){
+      ArrayList<PVector> coords = new ArrayList<PVector>();
+      //get the coordinates and iterate through them
+      JSONArray coordinates = geometry.getJSONArray("coordinates").getJSONArray(0);
+      for(int j = 0; j<coordinates.size(); j++){
+        float _lat = coordinates.getJSONArray(j).getFloat(1);
+        float _lon = coordinates.getJSONArray(j).getFloat(0);
+        
+        PVector coordinate = new PVector(_lat, _lon);
+        coords.add(coordinate);
+      }
+      Polygon grass = new Polygon(coords);
+      grass.type = landuse;
+      if(landuse.equals("grass")) {
+        grass.Grass_Bool = true;
+        polygons.add(grass);
+      }
     }
     
     if(type.equals("LineString")){

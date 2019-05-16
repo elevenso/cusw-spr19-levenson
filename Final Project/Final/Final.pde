@@ -9,11 +9,16 @@ boolean object_bool, add_bench, add_tree, clear, frame_rate = false, background_
 int bench_counter = 4;
 int tree_counter = 1;
 
+float new_area;
+boolean area_bool = true;
+
 void setup() {
   size(1326, 743);
   map = new MercatorMap(width-200, height, 37.8700300, 37.8686700, -122.2729400, -122.2703600, 0);
   pois = new ArrayList<POI>();
   ways = new ArrayList<Way>();
+  polygons = new ArrayList<Polygon>();
+  edge_list = new ArrayList<PVector>(); //right now contains x, y coord of objects and vertices of polygon
   loadData();
   parseData();
   
@@ -32,6 +37,11 @@ void setup() {
   
   //initialize model
   initModel();
+  
+  if (polygons.size()>3){
+      area();
+      area = 64990.87;
+    }
 }
 
 void draw() {
@@ -52,6 +62,8 @@ void draw() {
   for (int i =0; i<pois.size(); i++){
     pois.get(i).draw();
   }
+  
+   //polygons.get(3).draw();
   
   if (playOver){
     /*// Drawing the background graph this way is much less "intense"
@@ -102,6 +114,7 @@ void draw() {
     object = null;
     add_objects.beginDraw();
     add_objects.clear();
+    edge_list.clear();
     
     //return original objects
     for (int object=0; object<original_object_list.size(); object++){
@@ -121,6 +134,8 @@ void draw() {
     
     //restart model
     initModel();
+    area_bool = true;
+    new_area = 0;
     clear = false;
   }
   
@@ -128,7 +143,7 @@ void draw() {
   if (frame_rate == true & infoOver == false & warningOver == false) {
     textSize(16);
     fill(45);
-     text("Frame Rate: " + frameRate, width-180, 410);
+     text("Frame Rate: " + frameRate, width-180, 415);
   }
   
 }
@@ -161,6 +176,7 @@ void keyPressed(){
 }
 
 void mouseClicked(){
+  if (area_bool != false){
   add_objects.beginDraw(); //add objects on layer off screen
   
   if (object != null){
@@ -174,14 +190,21 @@ void mouseClicked(){
   if (object == benches) {
     bench_counter+=1;
     object_list.add(new PVector(mouseX, mouseY));
+    //if object within grass polygon
+    edge_list.add(new PVector(mouseX, mouseY));
+    calc_new_area();
   }
   
   if (object == trees) {
     tree_counter+=1;
     object_list.add(new PVector(mouseX, mouseY));
+    //if object within grass polygon
+    edge_list.add(new PVector(mouseX, mouseY));
+    calc_new_area();
   }
   if (overPlay(playX, playY, circleSize)){
     clicked = true;
   }
   initModel();
+  }
 }

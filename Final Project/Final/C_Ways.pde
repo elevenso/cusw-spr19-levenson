@@ -17,7 +17,7 @@ class Way{
   //Draw the road
   void draw(){
     strokeWeight(7);
-    stroke(200, 200);
+    stroke(180, 200);
     for(int i = 0; i<coordinates.size()-1; i++){
        //iterate through the coordinates and draw lines
        PVector screenStart = map.getScreenLocation(coordinates.get(i));
