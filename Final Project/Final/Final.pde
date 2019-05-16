@@ -3,7 +3,7 @@
 //initialize variables
 MercatorMap map;
 PFont helvetica, bold;
-boolean object_bool, add_bench, add_tree, clear, frame_rate = false, background_bool = true, clicked = false;
+boolean object_bool, add_bench, add_tree, clear, frame_rate = false, background_bool = false, clicked = false;
 
 //PGraphics add_objects;
 int bench_counter = 4;

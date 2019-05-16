@@ -14,19 +14,20 @@ void calc_new_area(){
   
   //for only three objects
   println("edges: " + edge_list.size());
-  if (edge_list.size() == 3) {
+ /* if (edge_list.size() == 3) {
     new_area = (edge_list.get(0).x*edge_list.get(1).y + edge_list.get(1).x*edge_list.get(2).y + edge_list.get(2).x*edge_list.get(0).y - edge_list.get(0).x*edge_list.get(2).y - edge_list.get(1).x*edge_list.get(0).y - edge_list.get(2).x*edge_list.get(1).y)/2;
   println("new_area: " + new_area);
-  }
+  }*/
   
-  /*if (edge_list.size()>2){
+  if (edge_list.size()>2){
     for (int i = 1; i<(edge_list.size()-1); i++) {
          new_area += (edge_list.get(i).x * edge_list.get(i-1).y - edge_list.get(i).y*edge_list.get(i-1).x);
       }
-      println("new area: " + new_area/2);
-  }*/
+     new_area = new_area/2;
+     println("new area: " + new_area);
+  }
 
-  if (new_area > area/10 && new_area < area/4) {
+  if (edge_list.size()<7 & new_area > area/6 & new_area < area/2) {
     area_bool = false;
     println("Not enough open space!");
   }

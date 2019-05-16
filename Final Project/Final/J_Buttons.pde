@@ -64,7 +64,7 @@ void button(){
     information.rect(width-180, height-340, 160, 250, 10);
     information.fill(200);
     information.textSize(14);
-    information.text("Error: Not enough open space! Try clearing the map and trying again.", width-170, height-320, 140, 200);
+    information.text("Error: Not enough open space! Try clearing the map and giving it another go.", width-170, height-320, 140, 200);
     information.endDraw();
     warningOver = false;
     }
